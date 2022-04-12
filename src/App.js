@@ -1,30 +1,27 @@
 import "./App.css";
-import Counter from "./components/counter/Counter";
-import { useState } from "react";
-import Button from "./components/button/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Counter from "./views/Counter";
+import Home from "./views/Home";
+import Products from "./views/Products";
+import About from "./views/About";
+import ProductDetailes from "./views/ProductDetailes";
+import Navbar from "./components/navbar/Navbar";
+
 function App() {
-  let [count, setCount] = useState(0);
-  const countUp = () => {
-    setCount((count) => count + 1);
-  };
-  const countDown = () => {
-    setCount((count) => count - 1);
-  };
   return (
-    <div className="App">
-      <Counter styles="alert alert-success" value={count} />
-      <Button
-        styles="btn btn-primary mt-5 me-5 fs-5"
-        value="+"
-        action={countUp}
-      />
-      <Button
-        styles="btn btn-warning mt-5 ms-5 fs-5"
-        value="-"
-        action={countDown}
-      />
-    </div>
+    <BrowserRouter className="App">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<ProductDetailes />} />
+        <Route path="/counter" element={<Counter />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
